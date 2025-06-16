@@ -1,103 +1,78 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import MainContent from "../components/MainContent";
+
+// 사이드바 카테고리 정의
+const sidebarCategories = [
+    "Skills",
+    "Experience",
+    "Certifications",
+    "Projects",
+] as const;
+type Category = "Home" | (typeof sidebarCategories)[number];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    const [selectedCategory, setSelectedCategory] = useState<Category>("Home");
+    const [selectedProjectId, setSelectedProjectId] = useState<
+        string | undefined
+    >();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    /* ---------------- 핸들러 ---------------- */
+    const handleCategorySelect = (cat: Category) => {
+        setSelectedCategory(cat);
+        if (cat === "Projects") {
+            // 첫 진입 시 카드 리스트만 보여주고 싶다면 ↓ 이 줄 삭제
+            // setSelectedProjectId(projects[0].id);
+        } else {
+            setSelectedProjectId(undefined);
+        }
+    };
+
+    const handleSelectProject = (id: string) => {
+        setSelectedCategory("Projects");
+        setSelectedProjectId(id);
+    };
+
+    const handleBackProject = () => {
+        setSelectedProjectId(undefined); // 카드 목록으로 복귀
+    };
+
+    /* -------------- 렌더링 -------------- */
+    return (
+        <div className="h-screen flex flex-col bg-gray-50">
+            {/* 헤더 */}
+            <header className="w-full border-b border-gray-300 bg-white">
+                <div className="w-full py-8 pl-6">
+                    <Header onLogoClick={() => handleCategorySelect("Home")} />
+                </div>
+            </header>
+
+            {/* 본문 */}
+            <div className="flex flex-1 h-full overflow-hidden">
+                {/* 사이드바 */}
+                <aside className="w-[280px] flex-shrink-0 bg-white border-r border-gray-200 py-8 px-6">
+                    <Sidebar
+                        categories={sidebarCategories as unknown as string[]}
+                        selectedCategory={selectedCategory}
+                        onSelectCategory={cat =>
+                            handleCategorySelect(cat as Category)
+                        }
+                    />
+                </aside>
+
+                {/* 메인 콘텐츠 */}
+                <main className="flex-1 overflow-y-auto px-6 md:px-12 py-6">
+                    <MainContent
+                        selectedCategory={selectedCategory}
+                        selectedProjectId={selectedProjectId}
+                        onSelectProject={handleSelectProject}
+                        onBackProject={handleBackProject}
+                    />
+                </main>
+            </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }
