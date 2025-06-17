@@ -1,19 +1,14 @@
 "use client";
 
 import React from "react";
-
+// import ThemeToggleSwitch from "@/components/common/ThemeToggleSwitch";
 interface HeaderProps {
     onLogoClick: () => void;
 }
 
-/**
- * Header 컴포넌트 — 로고(홈 이동) + 다크모드 토글 스위치
- * 1. 로고 클릭 → Home 이동 (prop 으로 전달)
- * 2. 스위치 클릭 → html 클래스를 light/dark 전환 (Tailwind darkMode: 'class')
- */
 const Header = ({ onLogoClick }: HeaderProps) => {
     return (
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-2 ml-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-2 ml-4 ">
             {/* 왼쪽: 이름 */}
             <button
                 onClick={onLogoClick}
@@ -29,6 +24,9 @@ const Header = ({ onLogoClick }: HeaderProps) => {
             </button>
 
             {/* 오른쪽: 다크모드 스위치 */}
+            {/* <div className="mt-4 md:mt-0 md:mr-4">
+                <ThemeToggleSwitch />
+            </div> */}
         </div>
     );
 };

@@ -105,7 +105,7 @@ const HomeSection = () => (
             {/* 마무리 문장 */}
             <motion.p
                 {...fadeInOut(1.4)}
-                className="text-xl italic text-center text-gray-500 dark:text-gray-400 mt-16"
+                className="text-xl italic text-center text-gray-500 dark:text-blue-300 mt-16"
             >
                 “기술은 성장 중이지만, 팀과 사용자에게 필요한 사람이 되고자
                 합니다.
