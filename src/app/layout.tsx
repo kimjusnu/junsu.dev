@@ -16,25 +16,34 @@ const geistMono = Geist_Mono({
 
 // SEO 기본 메타데이터
 export const metadata: Metadata = {
-    title: "김준수 포트폴리오 | 프론트엔드 개발자",
+    title: "프론트엔드 개발자 김준수 포트폴리오",
     description:
-        "Next.js 기반의 포트폴리오 사이트 – 직관적인 UI와 사용성 중심의 프론트엔드 개발을 지향합니다.",
+        "프론트엔드 개발자 김준수 포트폴리오입니다. Next.js 기반 프로젝트, UI/UX 중심 개발, 협업 경험, 실전 프로젝트를 담았습니다.",
     authors: [{ name: "김준수", url: "https://junsudev.vercel.app" }],
-    keywords: ["프론트엔드", "개발자", "Next.js", "포트폴리오", "김준수"],
+    keywords: [
+        "프론트엔드 포트폴리오",
+        "프론트엔드 개발자",
+        "프론트엔드 개발자 포트폴리오",
+        "Next.js 포트폴리오",
+        "개발자 이력서",
+        "김준수 개발자",
+        "리액트 포트폴리오",
+        "프론트엔드 취업 포트폴리오",
+    ],
     creator: "김준수",
     metadataBase: new URL("https://junsudev.vercel.app"),
     openGraph: {
-        title: "김준수 | 프론트엔드 개발자 포트폴리오",
+        title: "프론트엔드 포트폴리오 | 김준수 – Next.js 개발자",
         description:
-            "사용자 중심의 웹 경험을 만들어가는 프론트엔드 개발자 김준수입니다.",
+            "프론트엔드 포트폴리오 모범 사례 – Next.js, React 기반의 프로젝트 및 실무 경험 중심 개발자 포트폴리오입니다.",
         url: "https://junsudev.vercel.app",
         siteName: "김준수 포트폴리오",
         images: [
             {
-                url: "/og-image.png", // public 폴더 기준
+                url: "/og-image.png",
                 width: 1200,
                 height: 630,
-                alt: "김준수 포트폴리오 썸네일",
+                alt: "김준수 프론트엔드 포트폴리오 미리보기 이미지",
             },
         ],
         locale: "ko_KR",
@@ -42,11 +51,10 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "김준수 | 프론트엔드 개발자",
+        title: "프론트엔드 포트폴리오 | 김준수",
         description:
-            "Next.js 기반 포트폴리오 – 사용자 경험 중심 개발자 김준수입니다.",
+            "Next.js 기반 포트폴리오 – 실전 프로젝트, 협업 경험 중심 프론트엔드 개발자 김준수",
         images: ["/og-image.png"],
-        creator: "@your_twitter_id", // 없으면 생략 가능
     },
     robots: {
         index: true,
