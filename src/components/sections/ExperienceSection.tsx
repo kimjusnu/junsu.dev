@@ -12,7 +12,7 @@ import {
 const experiences = [
   {
     date: "2025.07.21 – 현재",
-    title: "Aimbe Lab - SW Team",
+    title: "Aimbe Lab · SW Team",
     role: "프론트엔드 개발",
     icon: <Briefcase className="w-4 h-4 text-blue-600" />,
     details: ["프론트엔드 개발"],
