@@ -73,12 +73,12 @@ const Sidebar = ({
                     <li className="flex items-center gap-2">
                         <Globe size={16} />
                         <a
-                            href="https://dietisdie.tistory.com"
+                            href="https://junsukim.substack.com/"
                             target="_blank"
                             rel="noreferrer"
                             className="hover:underline"
                         >
-                            dietisdie.tistory.com
+                            junsukim.substack.com
                         </a>
                     </li>
                 </ul>
