@@ -74,7 +74,7 @@ export const componique: Project = {
         "NPM",
         "GitHub Actions",
     ],
-    url: "https://www.componique.com/",
+    url: "https://componique.vercel.app/",
     repo: "https://github.com/kimjusnu/componique",
     imageUrl: "/componique.png",
     links: [
