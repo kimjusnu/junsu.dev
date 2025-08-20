@@ -84,57 +84,76 @@ const systemPrompt = `
 `;
 
 export async function POST(req: Request) {
-    try {
-        const { prompt } = await req.json();
+  try {
+    const { prompt } = await req.json();
 
-        console.log("📩 질문:", prompt);
-        console.log("🔑 GROQ:", process.env.GROQ_API_KEY?.slice(0, 8));
+    console.log("📩 질문:", prompt);
+    console.log("🔑 GROQ:", process.env.GROQ_API_KEY?.slice(0, 8));
 
-        /* ---------------- 3) 메시지 배열 구성 ---------------- */
-        const messages = [
-            { role: "system", content: systemPrompt },
-            { role: "assistant", content: portfolioKnowledge }, // AI 기억용 컨텍스트
-            { role: "user", content: prompt },
-        ];
+    /* ---------------- 3) 메시지 배열 구성 ---------------- */
+    const messages = [
+      { role: "system", content: systemPrompt },
+      { role: "assistant", content: portfolioKnowledge }, // AI 기억용 컨텍스트
+      { role: "user", content: prompt },
+    ];
 
-        const res = await fetch(
-            "https://api.groq.com/openai/v1/chat/completions",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
-                },
-                body: JSON.stringify({
-                    model: "llama3-70b-8192",
-                    messages,
-                    temperature: 0.7,
-                    max_tokens: 1024,
-                }),
-            }
-        );
+    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "llama3-70b-8192",
+        messages,
+        temperature: 0.7,
+        max_tokens: 1024,
+      }),
+    });
 
-        /* ---------------- 4) 에러 핸들링 ---------------- */
-        if (!res.ok) {
-            const err = await res.json();
-            console.error("❌ Groq API 오류:", err);
-            return NextResponse.json(
-                { result: `❌ Groq 오류: ${err.error?.message}` },
-                { status: res.status }
-            );
-        }
-
-        const { choices } = await res.json();
-        const answer = choices?.[0]?.message?.content?.trim();
-
-        return NextResponse.json({
-            result: answer || "❌ 응답이 비어있어요.",
-        });
-    } catch (error) {
-        console.error("❌ 서버 내부 예외:", error);
-        return NextResponse.json(
-            { result: "❌ AI 응답 처리 중 예외가 발생했습니다." },
-            { status: 500 }
-        );
+    /* ---------------- 4) 에러 핸들링 ---------------- */
+    if (!res.ok) {
+      const err = await res.json();
+      console.error("❌ Groq API 오류:", err);
+      return NextResponse.json(
+        { result: `❌ Groq 오류: ${err.error?.message}` },
+        { status: res.status }
+      );
     }
+
+    const { choices, usage } = await res.json();
+    const answer = choices?.[0]?.message?.content?.trim();
+
+    // 사용량 로깅
+    if (usage) {
+      console.log("💰 토큰 사용량:", {
+        prompt_tokens: usage.prompt_tokens,
+        completion_tokens: usage.completion_tokens,
+        total_tokens: usage.total_tokens,
+        estimated_cost: `$${((usage.total_tokens / 1000000) * 0.59).toFixed(
+          4
+        )}`,
+      });
+    }
+
+    return NextResponse.json({
+      result: answer || "❌ 응답이 비어있어요.",
+      usage: usage
+        ? {
+            prompt_tokens: usage.prompt_tokens,
+            completion_tokens: usage.completion_tokens,
+            total_tokens: usage.total_tokens,
+            estimated_cost: `$${((usage.total_tokens / 1000000) * 0.59).toFixed(
+              4
+            )}`,
+          }
+        : null,
+    });
+  } catch (error) {
+    console.error("❌ 서버 내부 예외:", error);
+    return NextResponse.json(
+      { result: "❌ AI 응답 처리 중 예외가 발생했습니다." },
+      { status: 500 }
+    );
+  }
 }
