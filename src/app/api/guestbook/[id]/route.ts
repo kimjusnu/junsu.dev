@@ -4,10 +4,10 @@ import { supabase } from "@/lib/supabase";
 // 좋아요 토글
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // 현재 좋아요 수 조회
     const { data: currentData, error: selectError } = await supabase
@@ -42,10 +42,10 @@ export async function PATCH(
 // 방명록 수정
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const { name, message, authorId } = await request.json();
 
     if (!name || !message) {
@@ -93,10 +93,10 @@ export async function PUT(
 // 방명록 삭제
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const { authorId } = await request.json();
 
     // 작성자 확인 (IP 주소로 식별)

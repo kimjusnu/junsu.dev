@@ -119,7 +119,7 @@ const ProjectListSection = ({ onSelectProject }: Props) => {
                         }}
                         className="absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 
                                    text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 
-                                   transition-opacity duration-200"
+                                   transition-opacity duration-200 cursor-pointer"
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </button>
@@ -131,7 +131,7 @@ const ProjectListSection = ({ onSelectProject }: Props) => {
                         }}
                         className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 
                                    text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 
-                                   transition-opacity duration-200"
+                                   transition-opacity duration-200 cursor-pointer"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </button>
