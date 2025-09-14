@@ -10,13 +10,13 @@ import {
 } from "lucide-react";
 
 const experiences = [
-  {
-    date: "2025.07.21 – 현재",
-    title: "Aimbe Lab · SW Team",
-    role: "프론트엔드 개발",
-    icon: <Briefcase className="w-4 h-4 text-blue-600" />,
-    details: ["프론트엔드 개발"],
-  },
+  // {
+  //   date: "2025.07.21 – 현재",
+  //   title: "Aimbe Lab · SW Team",
+  //   role: "프론트엔드 개발",
+  //   icon: <Briefcase className="w-4 h-4 text-blue-600" />,
+  //   details: ["프론트엔드 개발"],
+  // },
   {
     date: "2025.03.04 – 2025.06.30",
     title: "더이노베이터스 · TA 기술연구부서",
