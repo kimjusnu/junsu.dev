@@ -4,8 +4,7 @@ import { Project } from "./types";
 export const yiry: Project = {
   id: "yiry",
   title: "와이리 홈페이지 | Vue → Next.js 마이그레이션",
-  summary:
-    "SEO 개선과 반응형 UI 재구현을 위해 Vue 기반 사이트를 Next.js로 마이그레이션",
+  summary: "SEO 개선을 위한 Vue 기반 사이트를 Next.js로 마이그레이션",
   description: `기존 Vue.js로 제작된 와이리 기업 홈페이지를  
 **Next.js 기반 SSR 구조로 전면 재구현**하여 SEO 성능과 반응형 UI를 개선한 프로젝트입니다.
 
