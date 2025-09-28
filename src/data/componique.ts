@@ -4,8 +4,7 @@ import { Project } from "./types";
 export const componique: Project = {
   id: "componique",
   title: "Componique | 컴포넌트 UI 라이브러리 프로젝트",
-  summary:
-    "다크모드 대응·디자인 시스템 기반의 30+ UI 컴포넌트를 개발하고 npm에 배포",
+  summary: "디자인 시스템 기반의 30+ UI 컴포넌트를 개발하고 npm에 배포",
   description: `Componique는 Next.js + TailwindCSS 기반으로 구현한 오픈소스 UI 컴포넌트 라이브러리입니다.  
 프로젝트마다 반복되는 UI 구현 비용을 줄이고, 팀 내 디자인 시스템을 체계화하려는 목표로 시작되었습니다.
 
